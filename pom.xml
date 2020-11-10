@@ -6,4 +6,13 @@
     <artifactId>software-engineer</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Software Engineer</name>
+
+    <modules>
+        <module>algorithms</module>
+        <module>architecture</module>
+        <module>concepts</module>
+        <module>data-structure</module>
+        <module>java</module>
+        <module>system-design</module>
+    </modules>
 </project>
