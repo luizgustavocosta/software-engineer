@@ -51,4 +51,26 @@ class NodeTest {
         assertEquals(apple, tail.find(apple).getData());
     }
 
+    @Test
+    void circularInsert() {
+        final String letterA = "A";
+        final String letterB = "B";
+        final String letterZ = "Z";
+
+        final Node<String> head = Node.circularInsert(null, letterA);
+        Node<String> circularInsert = Node.circularInsert(head, letterB);
+        assertAll(() -> {
+            assertEquals(letterB, circularInsert.getData());
+            assertEquals(letterA, circularInsert.next().getData());
+            assertEquals(letterB, circularInsert.next().next().getData());
+        });
+
+        Node<String> otherCircularInsert = Node.circularInsert(circularInsert, letterZ);
+        assertAll(() -> {
+            assertEquals(letterZ, otherCircularInsert.getData());
+            assertEquals(letterB, otherCircularInsert.next().getData());
+            assertEquals(letterA, otherCircularInsert.next().next().getData());
+            assertEquals(letterZ, otherCircularInsert.next().next().next().getData());
+        });
+    }
 }

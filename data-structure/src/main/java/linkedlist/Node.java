@@ -10,7 +10,7 @@ public class Node<T> {
     private Node<T> next;
     private T data;
 
-    public Node(Node head, T data) {
+    public Node(Node<T> head, T data) {
         this.next = head;
         this.data = data;
     }
@@ -19,8 +19,8 @@ public class Node<T> {
         this(null, data);
     }
 
-    public Node<T> insert(Node head, T data) {
-        return new Node(head, data);
+    public Node<T> insert(Node<T> head, T data) {
+        return new Node<>(head, data);
     }
 
     public int size() {
@@ -61,10 +61,29 @@ public class Node<T> {
         while (!cursor.data.equals(value)) {
             cursor = cursor.next;
         }
-        if (cursor == this) {
-            return cursor;
-        }
         return cursor;
+    }
+
+    public static <T> Node<T> circularInsert(Node<T> head, T data) {
+        Node<T> insertion = new Node<>(data);
+        if (isNull(head)) {
+            insertion.next = insertion; // Circular
+            return insertion;
+        }
+        if (head.next == null) {
+            head.next = insertion;
+            insertion.next = head;
+            return insertion;
+        }
+        insertion.data = head.data; // Swap
+        head.data = data;
+        insertion.next = head.next;
+        head.next = insertion;
+        return head;
+    }
+
+    public Node<T> next() {
+        return this.next;
     }
 
     public T getData() {
